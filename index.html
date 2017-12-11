@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./static/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/index.css">
+
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="sticky-main-header">
+            <button class="ui circular plus icon button sticky-add-button">
+              <i class="plus icon"></i>
+            </button>
+        </div>
+        <div class="sticky-list swing clearfix">
+            
+        </div>
+        <div class="no-sticky">
+            No sticky item yet
+        </div>
+        <div class="sticky-edit hide">
+            <div class="sticky-edit-header">
+                <button class="ui circular angle icon button sticky-edit-back">
+                  <i class="angle left icon"></i>
+                </button>
+            </div>
+            <div class="sticky-edit-content" contenteditable="true">
+                sticky edit
+            </div>
+            
+        </div>
+    </div>
+    <script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+    </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="./static/js/semantic.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    // You can also require other files to run in this process
+        require('./renderer.js')
+    </script>
+    <template id="template-sticky" type="text/x-handlebars-template">
+        <div class="sticky-header">
+            <a href="#">
+                <img src="static/img/minimize.png" />
+            </a>
+        </div>
+        {{#each this}}
+            <div class="sticky">
+                {{sticktext}}
+            </div>
+        {{/each}}
+    </template>
+</body>
+
+</html>

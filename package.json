@@ -1,0 +1,27 @@
+{
+  "name": "sticky",
+  "version": "1.0.0",
+  "description": "A sticky notes for all platforms",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "Brijjesh",
+  "license": "00000",
+  "devDependencies": {
+    "electron": "~1.7.8",
+    "electron-packager": "^10.1.0"
+  },
+  "dependencies": {
+    "electron-json-storage": "^4.0.2",
+    "handlebar": "^1.0.0"
+  }
+}

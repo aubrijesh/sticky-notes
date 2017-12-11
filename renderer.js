@@ -180,6 +180,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		// 	  if (error) throw error;
 		// 	});
 		// });
+		$(".sticky-option-button").click(function() {
+			$('.ui.sidebar').sidebar('toggle');
+		});
 
 		$(".sticky-add-button").click(function() {
 			var data_id = "id" + Math.random().toString(16).slice(2);
@@ -200,10 +203,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			
 			var obj = {
 				id: data_id.toString(),
-				data: 'Edit your text here'
+				data: ''
 			};
 
-			saveSticky(data_id, "Edit your text here");
+			saveSticky(data_id, "");
 		});
 
 		$(".sticky-list").on("click", ".sticky .minimize-sticky", function (event) {

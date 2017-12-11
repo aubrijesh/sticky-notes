@@ -151,3 +151,26 @@ body {
 .sticky-edit-content:focus {
 	outline: none;
 }
+
+
+/*setting sidebar */
+.settings-container {
+	width: 100%;
+	padding: 1em;
+}
+
+.themes-list {
+
+}
+.setting-box {
+	padding-bottom: 3em;
+}
+.single-setting-span,
+.single-theme {
+	padding: 5px 10px;
+    display: inline-block;
+    background-color: #00b5ad;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

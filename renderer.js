@@ -96,8 +96,30 @@ document.addEventListener('DOMContentLoaded', function () {
 				stickyBaseData.stickyMapData.forEach(function( obj, key) {
 					console.log(key, obj);
 			  		var rem = Math.floor(Math.random() * defaultThemeColors.length) + 0;;
-
-			  		var template =$('<div class="sticky show" data-id="'+key+'" ><a href="#" class="clearfix"><img src="static/img/minimize.png" class="minimize-sticky" /><img src="static/img/maximize.png" class="maximize-sticky" /><img src="static/img/delete.png" class="delete-sticky" /></a><div class="sticky-content">'+obj.data+'</div></div>');
+			  		var template =`<div class="sticky show" data-id=${key} >
+			  								<a href="#" class="sticky-header clearfix">
+				  								<img src="static/img/minimize.png" class="minimize-sticky" />
+				  								<img src="static/img/maximize.png" class="maximize-sticky" />
+				  								<img src="static/img/delete.png" class="delete-sticky" />
+			  								</a>
+			  								<div class="sticky-content">
+			  									${obj.data}
+			  								</div>
+			  								<div class="sticky-image-list">
+			  								</div>
+			  								<div class="sticky-footer">
+			  									<a class="attach-image">
+			  										<label for=file${key} >
+			  											<i class="image icon"></i>
+			  										</label>
+			  										<input type="file" id=file${key} class="image-file-chooser" />
+			  									</a>
+			  									<a class="drop-sticky">
+			  										<i class="trash icon"></i>
+			  									</a>
+			  								</div>
+			  							</div>`;
+			  			template = $(template);
 			  		template.css(defaultThemeColors[rem]);
 					$(".sticky-list").append(template);
 				});
@@ -111,45 +133,49 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 	function initEvent() {
-		$(".sticky-list").on("click", ".sticky", function() {
-			var isFullSticky = $(this).hasClass("full-sticky");
-			$(this)
-				.siblings(".sticky")
-					.removeClass("full-sticky")
-					.end()
-				.addClass("full-sticky")
-				.find(".sticky-content")
-				.attr("contenteditable",true);
+		$(".sticky-list").on("click", ".sticky", function(event) {
+			event.stopPropagation();
+			if(event.target.classList[0] != "image-file-chooser") {
+				var isFullSticky = $(this).hasClass("full-sticky");
+				$(this)
+					.siblings(".sticky")
+						.removeClass("full-sticky")
+						.end()
+					.addClass("full-sticky")
+					.find(".sticky-content")
+					.attr("contenteditable",true);
 
-			// if(isFullSticky) {
-			// 	$(this)
-			// 		.removeClass("full-sticky")
-			// 		.attr("contenteditable",false);
+				// if(isFullSticky) {
+				// 	$(this)
+				// 		.removeClass("full-sticky")
+				// 		.attr("contenteditable",false);
 
-			// }
-			// else {
+				// }
+				// else {
+					
+				// }
 				
-			// }
-			
-			// var data_id = $(this).index();
-			// $(this).parents(".sticky-list").addClass("hide");
-			
-			// var previousText = "";
+				// var data_id = $(this).index();
+				// $(this).parents(".sticky-list").addClass("hide");
+				
+				// var previousText = "";
 
-			// storage.get(storageJsonName, function(error, mainJsonData) {
-			//  	console.log("previous data from storage",mainJsonData);
-			//  	for(var i=0;i<mainJsonData.stickyArray.length;i++) {
-			//  		if(mainJsonData.stickyArray[i].id == data_id) {
-			//  			previousText = mainJsonData.stickyArray[i].data;
-			//  			$(".sticky-edit")
-			//  				.removeClass("hide")
-			//  				.attr("data-id", data_id)
-			//  				.find(".sticky-edit-content")
-			//  				.text(previousText);
-			//  			break;
-			//  		}
-			//  	}
-			// });
+				// storage.get(storageJsonName, function(error, mainJsonData) {
+				//  	console.log("previous data from storage",mainJsonData);
+				//  	for(var i=0;i<mainJsonData.stickyArray.length;i++) {
+				//  		if(mainJsonData.stickyArray[i].id == data_id) {
+				//  			previousText = mainJsonData.stickyArray[i].data;
+				//  			$(".sticky-edit")
+				//  				.removeClass("hide")
+				//  				.attr("data-id", data_id)
+				//  				.find(".sticky-edit-content")
+				//  				.text(previousText);
+				//  			break;
+				//  		}
+				//  	}
+				// });
+			
+			}
 			
 		});
 
@@ -188,8 +214,27 @@ document.addEventListener('DOMContentLoaded', function () {
 			var data_id = "id" + Math.random().toString(16).slice(2);
 
 			var rem = Math.floor(Math.random() * defaultThemeColors.length) + 0;
-
-			var template =$('<div class="sticky newly-add-sticky" data-id="'+data_id+'" ><a href="#" class="clearfix"><img src="static/img/minimize.png" class="minimize-sticky"/><img src="static/img/maximize.png" class="maximize-sticky"/><img src="static/img/delete.png" class="delete-sticky" /></a><div class="sticky-content"></div></div>');
+			var template =`<div class="sticky newly-add-sticky" data-id=${data_id} >
+  								<a href="#" class="sticky-header clearfix">
+	  								<img src="static/img/minimize.png" class="minimize-sticky" />
+	  								<img src="static/img/maximize.png" class="maximize-sticky" />
+	  								<img src="static/img/delete.png" class="delete-sticky" />
+  								</a>
+  								<div class="sticky-content">
+  								</div>
+  								<div class="sticky-footer">
+  									<a class="attach-image">
+  										<label for=file${data_id} >
+  											<i class="image icon"></i>
+  										</label>
+  										<input type="file" id=file${data_id} class="image-file-chooser" />
+  									</a>
+  									<a class="drop-sticky">
+  										<i class="trash icon"></i>
+  									</a>
+  								</div>
+  							</div>`;
+			template = $(template);
 			template.css(defaultThemeColors[rem]);
 			$(".sticky-list").append(template);
 			setTimeout(function() {
@@ -245,6 +290,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			  }, 500);
 
 			deleteSticky(data_id);
+		});
+
+		$(".sticky-list").on('change', ".sticky input:file", function(event) {
+			event.stopPropagation();
+			event.preventDefault();
 		});
 	}
 	function saveSticky(data_id, currentText) {

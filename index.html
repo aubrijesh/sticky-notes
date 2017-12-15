@@ -74,15 +74,17 @@
     // You can also require other files to run in this process
         require('./renderer.js')
     </script>
-    <template id="template-sticky" type="text/x-handlebars-template">
-        <div class="sticky-header">
-            <a href="#">
-                <img src="static/img/minimize.png" />
-            </a>
-        </div>
-        {{#each this}}
-            <div class="sticky">
-                {{sticktext}}
+    <template id="template-sticky-list" type="text/x-handlebars-template">
+        {{#each headers}}
+            <div class="sticky show" data-id="{{@key}}" >
+                <a href="#" class="clearfix">
+                    <img src="static/img/minimize.png" class="minimize-sticky" />
+                    <img src="static/img/maximize.png" class="maximize-sticky" />
+                    <img src="static/img/delete.png" class="delete-sticky" />
+                </a>
+                <div class="sticky-content">
+                {{this.data}}
+                </div>
             </div>
         {{/each}}
     </template>
